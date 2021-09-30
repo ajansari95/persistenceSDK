@@ -8,6 +8,7 @@ import (
 	"github.com/persistenceOne/persistenceSDK/constants/errors"
 	"github.com/persistenceOne/persistenceSDK/modules/assets/internal/key"
 	"github.com/persistenceOne/persistenceSDK/modules/assets/internal/mappable"
+	"github.com/persistenceOne/persistenceSDK/modules/assets/internal/parameters"
 	"github.com/persistenceOne/persistenceSDK/modules/assets/internal/parameters/dummy"
 	"github.com/persistenceOne/persistenceSDK/schema/helpers"
 	"github.com/persistenceOne/persistenceSDK/schema/types"
@@ -113,6 +114,7 @@ func (genesis Genesis) Decode(cdc codec.JSONMarshaler, byte []byte) helpers.Gene
 }
 
 func (genesis Genesis) Initialize(mappableList []helpers.Mappable, parameterList []types.Parameter) helpers.Genesis {
+	genesis.DefaultParameterList = parameters.Prototype().GetList()
 	if len(mappableList) == 0 {
 		genesis.MappableList = genesis.DefaultMappableList
 	} else {
